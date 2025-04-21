@@ -25,8 +25,8 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/hello-go:latest .
+          docker build -t ghcr.io/mrblunderovich/hello-go:latest .
 
       - name: Push the Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}/hello-go:latest
+          docker push ghcr.io/mrblunderovich/hello-go:latest
