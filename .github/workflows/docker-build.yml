@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Publish Docker image
 
 on:
   push:
@@ -6,27 +6,24 @@ on:
       - main
 
 jobs:
-  build:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build the Docker image
         run: |
-          docker build -t ghcr.io/mrblunderovich/hello-go:latest .
+          docker build -t docker.io/${{secrets.DOCKER_USERNAME}}/hello-go:latest .
 
       - name: Push the Docker image
         run: |
-          docker push ghcr.io/mrblunderovich/hello-go:latest
+          docker push docker.io/${{secrets.DOCKER_USERNAME}}/hello-go:latest
