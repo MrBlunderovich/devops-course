@@ -4,7 +4,6 @@ After=network.target
 
 [Service]
 ExecStart=/var/www/hello/hello
-WorkingDirectory=/var/www/hello
 Restart=always
 User=maxim
 Group=maxim

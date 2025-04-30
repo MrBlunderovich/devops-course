@@ -1,0 +1,35 @@
+# ansible-playbook -i inventory.ini --ask-become playbook.yml
+
+- name: Deploy hello-go systemd service
+  hosts: 100.114.231.125
+  become: true
+
+  tasks:
+    - name: Upgrade packages
+      apt:
+        update_cache: true
+        upgrade: dist
+
+    - name: Copy web server files
+      copy:
+        src: "../hello"
+        dest: "/var/www/hello/hello"
+        mode: "0755"
+
+    - name: Copy service file
+      template:
+        src: hello-go.service.j2
+        dest: /etc/systemd/system/hello-go.service
+        mode: "0644"
+      register: service_file
+
+    - name: Reload systemd if service file changed
+      systemd:
+        daemon_reload: true
+      when: service_file.changed
+
+    - name: Ensure service is enabled and running
+      systemd:
+        name: hello-go
+        enabled: true
+        state: started
