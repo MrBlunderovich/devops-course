@@ -1,4 +1,4 @@
-name: Hello Tailscale SSH 17:10
+name: Hello Tailscale SSH
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Ansible
-        run: sudo apt update && sudo apt install -y ansible
+        run: sudo apt-get update && sudo apt-get install -y ansible
 
       - name: Tailscale
         uses: tailscale/github-action@v3
