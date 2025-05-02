@@ -1,0 +1,29 @@
+name: Hello Tailscale SSH
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-tailscale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+
+      - name: Connect to Tailnet
+        run: |
+          sudo tailscale up \
+            --authkey ${{ secrets.TS_AUTHKEY }} \
+            --ssh \
+            --hostname github-runner \
+            --ephemeral
+
+      - name: Wait for Tailscale to be ready
+        run: sleep 5
+
+      - name: Run remote command via Tailscale SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TARGET_USERNAME }}@${{ secrets.TS_TARGET_HOSTNAME }} \
+            'echo "Hello from GitHub Actions via Tailscale SSH" > ~/tssh.txt'
