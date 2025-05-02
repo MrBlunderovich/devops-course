@@ -8,17 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Tailscale
-        run: |
-          curl -fsSL https://tailscale.com/install.sh | sh
-
-      - name: Connect to Tailnet
-        run: |
-          sudo tailscale up \
-            --authkey ${{ secrets.TS_AUTHKEY }} \
-            --ssh \
-            --hostname github-runner \
-            --ephemeral
+      - name: Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          use-cache: "true"
 
       - name: Wait for Tailscale to be ready
         run: sleep 5
