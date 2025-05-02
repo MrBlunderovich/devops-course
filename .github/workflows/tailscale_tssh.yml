@@ -28,6 +28,7 @@ jobs:
 
       - name: Run playbook
         run: |
+          cd .ansible
           ansible-playbook -i inventory.ini timestamp.yml
 
       #- name: Run remote command via Tailscale SSH
