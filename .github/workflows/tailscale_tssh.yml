@@ -19,5 +19,4 @@ jobs:
 
       - name: Run remote command via Tailscale SSH
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.TARGET_USERNAME }}@oxygen \
-            'echo "Hello from GitHub Actions via Tailscale SSH" > ~/tssh.txt'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TARGET_USERNAME }}@oxygen 'echo "Hello from GitHub Actions via Tailscale SSH" > ~/tssh.txt'
