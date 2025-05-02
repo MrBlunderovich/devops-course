@@ -1,4 +1,4 @@
-name: Hello Tailscale SSH
+name: Hello Tailscale SSH 15:35
 
 on:
   workflow_dispatch:
