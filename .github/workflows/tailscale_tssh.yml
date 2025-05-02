@@ -28,7 +28,8 @@ jobs:
 
       - name: Run playbook
         run: |
-          ./.ansible/ansible-playbook -i inventory.ini timestamp.yml -u "$TARGET_USERNAME" -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
+          cd .ansible 
+          ansible-playbook -i inventory.ini timestamp.yml -u "$TARGET_USERNAME" -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
 
       #- name: Run remote command via Tailscale SSH
       #  run: |
