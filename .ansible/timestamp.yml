@@ -1,0 +1,5 @@
+- name: Write timestamp to a file
+  hosts: ci_targets
+  tasks:
+    - name: Write timestamp to ~/gh_ansible_timestamp.txt
+      ansible.builtin.command: "date '+%Y-%m-%d %H:%M:%S' > ~/gh_ansible_timestamp.txt"
