@@ -31,7 +31,7 @@ jobs:
       - name: Install Ansible
         run: sudo apt-get update && sudo apt-get install -y ansible
 
-      - name: Install Ansible
+      - name: Install Ansible Docker module
         run: sudo ansible-galaxy collection install community.docker
 
       - name: Tailscale
@@ -46,5 +46,5 @@ jobs:
       - name: Run docker deploy playbook
         run: |
           cd .ansible 
-          ansible-playbook -i ${{ secrets.TS_TARGET_HOSTNAME }}, deploy-container.yml -u ${{ secrets.TARGET_USERNAME }} -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'" --extra-vars "dockerio_username=${{secrets.DOCKER_USERNAME}}"
+          ansible-playbook -i ${{ secrets.TS_TARGET_HOSTNAME }}, deploy-container.yml -u ${{ secrets.TARGET_USERNAME }} -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'" --extra-vars "DOCKERIO_USERNAME=${{secrets.DOCKER_USERNAME}}"
           cd -
