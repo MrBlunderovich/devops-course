@@ -1,5 +1,5 @@
 - name: Deploy container
-  hosts: 100.114.231.125
+  hosts: all
   tasks:
     - name: Run Deploy script
       ansible.builtin.script: ./ansible-deploy-container.sh
