@@ -1,7 +1,29 @@
-- name: Deploy container
+- name: Deploy Docker container
   hosts: all
   tasks:
-    - name: Run Deploy script
-      ansible.builtin.script: ./ansible-deploy-container.sh
-      environment:
-        DOCKERIO_USERNAME: "{{ dockerio_username }}"
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: "{{ DOCKERIO_USERNAME }}/hello-go"
+        tag: latest
+        source: pull
+
+    - name: Stop existing container (if running)
+      community.docker.docker_container:
+        name: hello-go
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove existing container (if it exists)
+      community.docker.docker_container:
+        name: hello-go
+        state: absent
+      ignore_errors: yes
+
+    - name: Run new Docker container
+      community.docker.docker_container:
+        name: hello-go
+        image: "{{ DOCKERIO_USERNAME }}/hello-go:latest"
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - "3000:8080"
