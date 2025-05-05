@@ -1,4 +1,4 @@
-# ansible-playbook -i inventory.ini --ask-become playbook.yml
+# ansible-playbook -i inventory.ini --ask-become hello-go-service.yml
 
 - name: Deploy hello-go systemd service
   hosts: 100.114.231.125

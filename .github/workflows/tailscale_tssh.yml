@@ -1,15 +1,10 @@
 name: Hello Tailscale SSH
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   hello-tailscale:
     runs-on: ubuntu-latest
-    env:
-      TARGET_USERNAME: ${{ secrets.TARGET_USERNAME }}
 
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +24,7 @@ jobs:
       - name: Run playbook
         run: |
           cd .ansible 
-          ansible-playbook -i ${{ secrets.TS_TARGET_HOSTNAME }}, timestamp.yml -u $TARGET_USERNAME -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
+          ansible-playbook -i ${{ secrets.TS_TARGET_HOSTNAME }}, timestamp.yml -u ${{ secrets.TARGET_USERNAME }} -e "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
 
       #- name: Run remote command via Tailscale SSH
       #  run: |
