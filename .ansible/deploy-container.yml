@@ -1,0 +1,7 @@
+- name: Deploy container
+  hosts: 100.114.231.125
+  tasks:
+    - name: Run Deploy script
+      ansible.builtin.script: ./ansible-deploy-container.sh
+      environment:
+        DOCKERIO_USERNAME: "{{ dockerio_username }}"
