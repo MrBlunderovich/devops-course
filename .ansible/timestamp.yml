@@ -2,4 +2,4 @@
   hosts: 100.114.231.125
   tasks:
     - name: Write timestamp to ~/gh_ansible_timestamp.txt
-      ansible.builtin.command: "date '+%Y-%m-%d %H:%M:%S' > ~/gh_ansible_timestamp.txt"
+      ansible.builtin.shell: "date '+%Y-%m-%d %H:%M:%S' > ~/gh_ansible_timestamp.txt"
