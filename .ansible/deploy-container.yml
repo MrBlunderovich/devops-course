@@ -24,6 +24,8 @@
         name: hello-go
         image: "{{ DOCKERIO_USERNAME }}/hello-go:latest"
         state: started
+        recreate: true
+        pull: true
         restart_policy: unless-stopped
         ports:
           - "3000:8080"
