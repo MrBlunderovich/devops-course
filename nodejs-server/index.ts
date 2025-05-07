@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/dockerized", (_, res) => {
-  const filePath = path.join(__dirname, "index.html");
+  const filePath = path.join(__dirname, "..", "index.html");
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       res.status(500).send("Error reading HTML file");
