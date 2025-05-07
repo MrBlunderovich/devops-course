@@ -3,26 +3,26 @@
   tasks:
     - name: Pull Docker image
       community.docker.docker_image:
-        name: "{{ DOCKERIO_USERNAME }}/hello-go"
+        name: "{{ DOCKERIO_USERNAME }}/hello-node"
         tag: latest
         source: pull
 
     - name: Stop existing container (if running)
       community.docker.docker_container:
-        name: hello-go
+        name: hello-node
         state: stopped
       ignore_errors: yes
 
     - name: Remove existing container (if it exists)
       community.docker.docker_container:
-        name: hello-go
+        name: hello-node
         state: absent
       ignore_errors: yes
 
     - name: Run new Docker container
       community.docker.docker_container:
-        name: hello-go
-        image: "{{ DOCKERIO_USERNAME }}/hello-go:latest"
+        name: hello-node
+        image: "{{ DOCKERIO_USERNAME }}/hello-node:latest"
         state: started
         recreate: true
         pull: true

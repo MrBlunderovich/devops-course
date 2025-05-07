@@ -1,6 +1,6 @@
-FROM golang:1.24-alpine
+FROM node:22-alpine
 WORKDIR /app
-COPY . .
-RUN go build hello.go
-CMD ["./hello"]
+COPY nodejs-server/ .
+RUN npm run build
+CMD ["node", "./dist/index.js"]
 EXPOSE 8080

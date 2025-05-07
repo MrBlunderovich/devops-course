@@ -22,11 +22,11 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t docker.io/${{secrets.DOCKER_USERNAME}}/hello-go:latest .
+          docker build -t docker.io/${{secrets.DOCKER_USERNAME}}/hello-node:latest .
 
       - name: Push the Docker image
         run: |
-          docker push docker.io/${{secrets.DOCKER_USERNAME}}/hello-go:latest
+          docker push docker.io/${{secrets.DOCKER_USERNAME}}/hello-node:latest
 
       - name: Install Ansible
         run: sudo apt-get update && sudo apt-get install -y ansible
