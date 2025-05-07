@@ -20,7 +20,7 @@ app.get("/dockerized", (_, res) => {
       res.status(500).send("Error reading HTML file");
       return;
     }
-    res.send(data);
+    res.send(data.replace("{{time}}", new Date().toDateString()));
   });
 });
 
