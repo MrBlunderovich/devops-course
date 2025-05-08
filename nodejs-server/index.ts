@@ -1,4 +1,4 @@
-// curl -X POST http://localhost:3801/api/hello -H "Content-Type: application/json" -d '{"name":"Andrey"}'
+// curl -X POST http://localhost:3000/dockerized/api/hello -H "Content-Type: application/json" -d '{"name":"Gustavo"}'
 
 import "source-map-support/register.js";
 import express from "express";
